@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import InputContext from "../../../store/input-context";
 import Question from "./Question";
+import Error from "./Error";
 
 const QuestionList = () => {
   const inputCtx = useContext(InputContext);
@@ -9,7 +10,8 @@ const QuestionList = () => {
   if (inputCtx.questions.length <= 0) {
     return (
       <div>
-        <h1>Loading...</h1>
+        {inputCtx.error && <h1>Loading...</h1>}
+        {!inputCtx.error && <Error />}
       </div>
     );
   } else {

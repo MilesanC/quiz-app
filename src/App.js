@@ -7,7 +7,6 @@ import QuestionList from "./components/setup/quiz/QuestionList";
 
 function App() {
   const [inputQuiz, setInputQuiz] = useState({});
-  // const [questions, setQuestions] = useState([]);
 
   const inputCtx = useContext(InputContext);
 
@@ -19,7 +18,12 @@ function App() {
         return respon.json();
       })
       .then((data) => {
-        inputCtx.questionsArr(data.results);
+        console.log(data);
+        if (data.response_code !== 0) {
+          inputCtx.setError();
+        } else {
+          inputCtx.questionsArr(data.results);
+        }
       });
   }, [inputQuiz]);
 
